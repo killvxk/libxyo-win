@@ -1,0 +1,15 @@
+//
+// XYO Win Library
+//
+// Copyright (c) 2018 Grigore Stefan <g_stefan@yahoo.com>
+// Created by Grigore Stefan <g_stefan@yahoo.com>
+//
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+//
+
+#include "xyo-core-application-version--os-win-rc.hpp"
+#include "libxyo-win-version.hpp"
+#include "libxyo-win-copyright.hpp"
+
+XYO_CORE_APPLICATION_VERSION_INFO(LIBXYO_WIN,"libxyo-win.dll","XYO Win Library");
+
