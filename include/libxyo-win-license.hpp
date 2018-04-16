@@ -7,8 +7,8 @@
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
 //
 
-#ifndef LIBXYO_WIN_LICENCE_HPP
-#define LIBXYO_WIN_LICENCE_HPP
+#ifndef LIBXYO_WIN_LICENSE_HPP
+#define LIBXYO_WIN_LICENSE_HPP
 
 #ifndef XYO_WIN__EXPORT_HPP
 #include "xyo-win--export.hpp"
