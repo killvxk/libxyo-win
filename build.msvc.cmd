@@ -41,6 +41,8 @@ rem --- </core>
 
 rem --- <make>
 
+echo ^> libxyo-win ^<
+
 set XYO_CC=%XYO_PATH_REPOSITORY%\bin\xyo-cc.exe
 
 set XLIB_STATIC= 
