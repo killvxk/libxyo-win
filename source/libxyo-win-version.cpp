@@ -14,9 +14,9 @@ namespace Lib {
 		namespace Win {
 
 			static const char *versionVersion="1.0.0";
-			static const char *versionBuild="39";
-			static const char *versionVersionWithBuild="1.0.0.39";
-			static const char *versionDatetime="2018-04-16 02:06:16";
+			static const char *versionBuild="40";
+			static const char *versionVersionWithBuild="1.0.0.40";
+			static const char *versionDatetime="2018-05-07 02:08:10";
 
 			const char *Version::getVersion() {
 				return versionVersion;

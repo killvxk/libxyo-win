@@ -10,10 +10,10 @@
 #ifndef LIBXYO_WIN_VERSION_HPP
 #define LIBXYO_WIN_VERSION_HPP
 
-#define LIBXYO_WIN_VERSION_ABCD                 1,0,0,39
+#define LIBXYO_WIN_VERSION_ABCD                 1,0,0,40
 #define LIBXYO_WIN_VERSION_STR                 "1.0.0"
-#define LIBXYO_WIN_VERSION_STR_BUILD           "39"
-#define LIBXYO_WIN_VERSION_STR_DATETIME        "2018-04-16 02:06:16"
+#define LIBXYO_WIN_VERSION_STR_BUILD           "40"
+#define LIBXYO_WIN_VERSION_STR_DATETIME        "2018-05-07 02:08:10"
 
 #ifndef XYO_RC
 
