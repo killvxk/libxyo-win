@@ -104,7 +104,6 @@ namespace XYO {
 			return (S_OK);
 		};
 
-
 		ULONG WebBrowser::AddRef() {
 			return (ULONG)1;
 		};
@@ -845,7 +844,6 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-
 		//IProtectFocus
 		HRESULT STDMETHODCALLTYPE WebBrowser::AllowFocusChange(BOOL *pfAllow) {
 			pfAllow;
@@ -872,7 +870,6 @@ namespace XYO {
 			x,y;
 			return (E_NOTIMPL);
 		};
-
 
 		int WebBrowser::connectObject() {
 			IWebBrowser2 *webBrowser2;
@@ -938,7 +935,6 @@ namespace XYO {
 			};
 			return 1;
 		};
-
 
 		LRESULT WebBrowser::windowProcedure(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 			switch (uMsg) {

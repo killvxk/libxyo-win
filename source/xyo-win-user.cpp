@@ -226,7 +226,6 @@ namespace XYO {
 
 		HRESULT User::removeUserAccountOnAD(wchar_t *ComputerNameAndUser) {
 
-
 			HRESULT hr = S_OK;
 			IADsUser *padsUser=NULL;
 			IADsContainer *padsContainer=NULL;
