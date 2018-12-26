@@ -14,7 +14,7 @@
 #include "xyo-core--export.hpp"
 #endif
 
-#ifdef XYO_DYNAMIC_LINK
+#ifdef XYO_COMPILE_DYNAMIC_LIBRARY
 #   ifdef  XYO_WIN_INTERNAL
 #       define XYO_WIN_EXPORT XYO_EXPORT
 #   else
