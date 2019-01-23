@@ -1,4 +1,7 @@
 @echo off
+rem Public domain
+rem http://unlicense.org/
+rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 rem --- make
 
@@ -27,5 +30,3 @@ xyo-cc --mode=%ACTION% --lib libxyo-win --source-is-separate %XLIB_STATIC%
 IF ERRORLEVEL 1 goto ErrorMake
 xyo-cc --mode=%ACTION% --dll libxyo-win --no-version --source-is-separate %XLIB%
 IF ERRORLEVEL 1 goto ErrorMake
-
-
