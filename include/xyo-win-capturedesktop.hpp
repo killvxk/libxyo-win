@@ -16,14 +16,11 @@
 
 namespace XYO {
 	namespace Win {
+		namespace CaptureDesktop {
 
-		class CaptureDesktop {
-			public:
-
-				XYO_WIN_EXPORT static bool captureDesktopToPNGFile(char *fileName);
+			XYO_WIN_EXPORT bool captureDesktopToPNGFile(char *fileName);
 
 		};
-
 	};
 };
 

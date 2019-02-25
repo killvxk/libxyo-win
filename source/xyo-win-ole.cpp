@@ -15,30 +15,32 @@
 
 namespace XYO {
 	namespace Win {
+		namespace Ole {
 
-		using namespace XYO::Core;
+			using namespace XYO::Core;
 
-		class XOle {
-			public:
-				bool isValid;
+			class XOle {
+				public:
+					bool isValid;
 
-				XOle();
-				~XOle();
+					XOle();
+					~XOle();
+			};
+
+			XOle::XOle() {
+				isValid=true;
+				OleInitialize(NULL);
+			};
+
+			XOle::~XOle() {
+				OleUninitialize();
+			};
+
+			bool isValid() {
+				return (TSingletonProcess<XOle>::getValue())->isValid;
+			};
+
 		};
-
-		XOle::XOle() {
-			isValid=true;
-			OleInitialize(NULL);
-		};
-
-		XOle::~XOle() {
-			OleUninitialize();
-		};
-
-		bool Ole::isValid() {
-			return (TSingletonProcess<XOle>::getValue())->isValid;
-		};
-
 	};
 };
 

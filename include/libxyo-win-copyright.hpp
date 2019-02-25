@@ -25,18 +25,13 @@
 namespace Lib {
 	namespace XYO {
 		namespace Win {
-
-			class Copyright {
-				public:
-
-					XYO_WIN_EXPORT static const char *copyright();
-					XYO_WIN_EXPORT static const char *publisher();
-					XYO_WIN_EXPORT static const char *company();
-					XYO_WIN_EXPORT static const char *contact();
-					XYO_WIN_EXPORT static const char *fullCopyright();
-
+			namespace Copyright {
+				XYO_WIN_EXPORT const char *copyright();
+				XYO_WIN_EXPORT const char *publisher();
+				XYO_WIN_EXPORT const char *company();
+				XYO_WIN_EXPORT const char *contact();
+				XYO_WIN_EXPORT const char *fullCopyright();
 			};
-
 		};
 	};
 };

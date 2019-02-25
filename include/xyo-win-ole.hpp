@@ -16,12 +16,11 @@
 
 namespace XYO {
 	namespace Win {
+		namespace Ole {
 
-		class Ole {
-			public:
-				XYO_WIN_EXPORT static bool isValid();
+			XYO_WIN_EXPORT bool isValid();
+
 		};
-
 	};
 };
 

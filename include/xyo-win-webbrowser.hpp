@@ -219,7 +219,7 @@ namespace XYO {
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE resizeBy(LONG x,LONG y);
 
 				//Browser
-				inline void setBrowserDefaultAddress(const Core::String &url){
+				inline void setBrowserDefaultAddress(const Core::String &url) {
 					browserDefaultAddress_=url;
 				};
 

@@ -16,15 +16,12 @@
 
 namespace XYO {
 	namespace Win {
+		namespace Util {
 
-		class Util {
-			public:
-				XYO_WIN_EXPORT static void SendMessageToAllChildWindowsIE(HWND hParendWnd, UINT MessageId, WPARAM wParam, LPARAM lParam);
-				XYO_WIN_EXPORT static void PostMessageToProcessWindows(UINT MessageId, WPARAM wParam, LPARAM lParam);
+			XYO_WIN_EXPORT void sendMessageToAllChildWindowsIE(HWND hParendWnd, UINT MessageId, WPARAM wParam, LPARAM lParam);
+			XYO_WIN_EXPORT void postMessageToProcessWindows(UINT MessageId, WPARAM wParam, LPARAM lParam);
 
 		};
-
-
 	};
 };
 

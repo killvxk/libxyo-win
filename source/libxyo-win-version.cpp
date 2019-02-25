@@ -12,25 +12,27 @@
 namespace Lib {
 	namespace XYO {
 		namespace Win {
+			namespace Version {
 
-			static const char *versionVersion="1.0.0";
-			static const char *versionBuild="40";
-			static const char *versionVersionWithBuild="1.0.0.40";
-			static const char *versionDatetime="2018-05-07 02:08:10";
+				static const char *version_="2.0.0";
+				static const char *build_="41";
+				static const char *versionWithBuild_="2.0.0.41";
+				static const char *datetime_="2019-02-25 11:50:54";
 
-			const char *Version::getVersion() {
-				return versionVersion;
-			};
-			const char *Version::getBuild() {
-				return versionBuild;
-			};
-			const char *Version::getVersionWithBuild() {
-				return versionVersionWithBuild;
-			};
-			const char *Version::getDatetime() {
-				return versionDatetime;
-			};
+				const char *version() {
+					return version_;
+				};
+				const char *build() {
+					return build_;
+				};
+				const char *versionWithBuild() {
+					return versionWithBuild_;
+				};
+				const char *datetime() {
+					return datetime_;
+				};
 
+			};
 		};
 	};
 };

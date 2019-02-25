@@ -17,13 +17,10 @@
 namespace Lib {
 	namespace XYO {
 		namespace Win {
-
-			class License {
-				public:
-					XYO_WIN_EXPORT static const char *content();
-					XYO_WIN_EXPORT static const char *shortContent();
+			namespace License {
+				XYO_WIN_EXPORT const char *content();
+				XYO_WIN_EXPORT const char *shortContent();
 			};
-
 		};
 	};
 };

@@ -12,33 +12,35 @@
 namespace Lib {
 	namespace XYO {
 		namespace Win {
+			namespace Copyright {
 
-			static const char *copyright_ = "Copyright (C) Grigore Stefan.";
-			static const char *publisher_ = "Grigore Stefan";
-			static const char *company_ = "Grigore Stefan";
-			static const char *contact_ = "g_stefan@yahoo.com";
-			static const char *fullCopyright_ = "Copyright (C) Grigore Stefan. <g_stefan@yahoo.com>";
+				static const char *copyright_ = "Copyright (c) Grigore Stefan";
+				static const char *publisher_ = "Grigore Stefan";
+				static const char *company_ = "Grigore Stefan";
+				static const char *contact_ = "g_stefan@yahoo.com";
+				static const char *fullCopyright_ = "Copyright (c) Grigore Stefan <g_stefan@yahoo.com>";
 
-			const char *Copyright::copyright() {
-				return copyright_;
+				const char *copyright() {
+					return copyright_;
+				};
+
+				const char *publisher() {
+					return publisher_;
+				};
+
+				const char *company() {
+					return company_;
+				};
+
+				const char *contact() {
+					return contact_;
+				};
+
+				const char *fullCopyright() {
+					return fullCopyright_;
+				};
+
 			};
-
-			const char *Copyright::publisher() {
-				return publisher_;
-			};
-
-			const char *Copyright::company() {
-				return company_;
-			};
-
-			const char *Copyright::contact() {
-				return contact_;
-			};
-
-			const char *Copyright::fullCopyright() {
-				return fullCopyright_;
-			};
-
 		};
 	};
 };

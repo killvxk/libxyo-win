@@ -24,15 +24,12 @@
 namespace Lib {
 	namespace XYO {
 		namespace Win {
-
-			class Version {
-				public:
-					XYO_WIN_EXPORT static const char *getVersion();
-					XYO_WIN_EXPORT static const char *getBuild();
-					XYO_WIN_EXPORT static const char *getVersionWithBuild();
-					XYO_WIN_EXPORT static const char *getDatetime();
+			namespace Version {
+				XYO_WIN_EXPORT const char *version();
+				XYO_WIN_EXPORT const char *build();
+				XYO_WIN_EXPORT const char *versionWithBuild();
+				XYO_WIN_EXPORT const char *datetime();
 			};
-
 		};
 	};
 };
