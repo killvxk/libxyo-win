@@ -14,11 +14,14 @@
 #include "xyo-win.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class INotify :
-			public virtual Core::Object {
+			public virtual Core::Object
+		{
 				XYO_CORE_INTERFACE(INotify);
 
 			public:

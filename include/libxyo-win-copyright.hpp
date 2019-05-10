@@ -22,10 +22,14 @@
 #include "xyo-win--export.hpp"
 #endif
 
-namespace Lib {
-	namespace XYO {
-		namespace Win {
-			namespace Copyright {
+namespace Lib
+{
+	namespace XYO
+	{
+		namespace Win
+		{
+			namespace Copyright
+			{
 				XYO_WIN_EXPORT const char *copyright();
 				XYO_WIN_EXPORT const char *publisher();
 				XYO_WIN_EXPORT const char *company();

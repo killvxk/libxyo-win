@@ -14,9 +14,12 @@
 #include "xyo-win.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
-		namespace CaptureDesktop {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace CaptureDesktop
+		{
 
 			XYO_WIN_EXPORT bool captureDesktopToPNGFile(char *fileName);
 

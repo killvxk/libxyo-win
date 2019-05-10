@@ -14,9 +14,12 @@
 #include "xyo-win.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
-		namespace Util {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace Util
+		{
 
 			XYO_WIN_EXPORT void sendMessageToAllChildWindowsIE(HWND hParendWnd, UINT MessageId, WPARAM wParam, LPARAM lParam);
 			XYO_WIN_EXPORT void postMessageToProcessWindows(UINT MessageId, WPARAM wParam, LPARAM lParam);

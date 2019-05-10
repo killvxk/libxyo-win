@@ -14,11 +14,14 @@
 #include "xyo-win-application.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class SimpleApplication :
-			public virtual Application {
+			public virtual Application
+		{
 			protected:
 				LPSTR className_;
 				LPSTR windowName_;

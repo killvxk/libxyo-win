@@ -14,10 +14,14 @@
 #include "xyo-win--export.hpp"
 #endif
 
-namespace Lib {
-	namespace XYO {
-		namespace Win {
-			namespace License {
+namespace Lib
+{
+	namespace XYO
+	{
+		namespace Win
+		{
+			namespace License
+			{
 				XYO_WIN_EXPORT const char *content();
 				XYO_WIN_EXPORT const char *shortContent();
 			};

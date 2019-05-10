@@ -14,9 +14,12 @@
 #include "xyo-win.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
-		namespace Ole {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace Ole
+		{
 
 			XYO_WIN_EXPORT bool isValid();
 

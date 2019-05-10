@@ -13,19 +13,24 @@
 #include "xyo-win-messagemanager.hpp"
 #include "xyo-win-tnotify.hpp"
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		using namespace XYO;
 		using namespace XYO::Core;
 
-		MessageManager::MessageManager() {
+		MessageManager::MessageManager()
+		{
 			InitializeCriticalSection(&cs_);
 		};
 
-		MessageManager::~MessageManager() {
+		MessageManager::~MessageManager()
+		{
 			WindowList::Node *x;
-			for (x = windowList_.head; x!=NULL; x=x->next) {
+			for (x = windowList_.head; x != NULL; x = x->next)
+			{
 				x->value->setNotifyOnDestroy(NULL);
 			};
 			windowList_.empty();
@@ -34,9 +39,10 @@ namespace XYO {
 
 		typedef void (MessageManager::*eventDestroy_)(MessageManager::WindowList::Node *);
 
-		MessageManager::WindowList::Node *MessageManager::add(Window *p) {
+		MessageManager::WindowList::Node *MessageManager::add(Window *p)
+		{
 			WindowList::Node *retV;
-			TPointer<TNotify<MessageManager, eventDestroy_,WindowList::Node *> > n;
+			TPointer<TNotify<MessageManager, eventDestroy_, WindowList::Node *> > n;
 
 			EnterCriticalSection(&cs_);
 			retV = windowList_.pushToTailX(p);
@@ -48,7 +54,8 @@ namespace XYO {
 			return retV;
 		};
 
-		void MessageManager::remove(WindowList::Node *window) {
+		void MessageManager::remove(WindowList::Node *window)
+		{
 			EnterCriticalSection(&cs_);
 			windowList_.extractNode(window);
 			LeaveCriticalSection(&cs_);
@@ -56,40 +63,56 @@ namespace XYO {
 			windowList_.deleteNode(window);
 		};
 
-		int MessageManager::processAllMessages() {
+		int MessageManager::processAllMessages()
+		{
 			MSG msg;
 			WindowList::Node *scan;
 			msg.wParam = 0;
-			while (!windowList_.isEmpty()) {
-				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-					if (msg.message == WM_QUIT) {
+			while (!windowList_.isEmpty())
+			{
+				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+				{
+					if (msg.message == WM_QUIT)
+					{
 						break;
 					};
-					for (scan = windowList_.head; scan!=NULL; scan=scan->next) {
-						if ((scan->value.value())->translateAccelerator(msg)) {
+					for (scan = windowList_.head; scan != NULL; scan = scan->next)
+					{
+						if ((scan->value.value())->translateAccelerator(msg))
+						{
 							break;
 						};
 					};
-					if (scan!=nullptr) {
+					if (scan != nullptr)
+					{
 						continue;
 					};
-					if (IsWindow(msg.hwnd)) {
+					if (IsWindow(msg.hwnd))
+					{
 						TranslateMessage(&msg);
 						DispatchMessage(&msg);
 					};
-				} else {
+				}
+				else
+				{
 					WaitForSingleObject(GetCurrentThread(), 1);
 				};
 			};
-			while (!windowList_.isEmpty()) {
-				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-					if (IsWindow(msg.hwnd)) {
+			while (!windowList_.isEmpty())
+			{
+				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+				{
+					if (IsWindow(msg.hwnd))
+					{
 						TranslateMessage(&msg);
 						DispatchMessage(&msg);
 					};
-				} else {
+				}
+				else
+				{
 					WaitForSingleObject(GetCurrentThread(), 1);
-					if (!windowList_.isEmpty()) {
+					if (!windowList_.isEmpty())
+					{
 						DestroyWindow(*((windowList_.head)->value.value()));
 					};
 				};
@@ -97,26 +120,32 @@ namespace XYO {
 			return (int)msg.wParam;
 		};
 
-		void MessageManager::eventOnDestroy_(WindowList::Node *window) {
+		void MessageManager::eventOnDestroy_(WindowList::Node *window)
+		{
 			window->value->setNotifyOnDestroy(nullptr);
 			remove(window);
 		};
 
-		void MessageManager::postMessageToAll(UINT m) {
+		void MessageManager::postMessageToAll(UINT m)
+		{
 			WindowList::Node *x;
-			for (x = windowList_.head; x!=NULL; x=x->next) {
+			for (x = windowList_.head; x != NULL; x = x->next)
+			{
 				PostMessage(*(x->value.value()), m, 0, 0);
 			};
 		};
 
-		void MessageManager::sendMessageToAll(UINT m) {
+		void MessageManager::sendMessageToAll(UINT m)
+		{
 			WindowList::Node *x;
-			for (x = windowList_.head; x!=NULL; x=x->next) {
+			for (x = windowList_.head; x != NULL; x = x->next)
+			{
 				SendMessage(*(x->value.value()), m, 0, 0);
 			};
 		};
 
-		void MessageManager::initMemory() {
+		void MessageManager::initMemory()
+		{
 			WindowList::initMemory();
 		};
 

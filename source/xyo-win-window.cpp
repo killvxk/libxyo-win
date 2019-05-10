@@ -12,18 +12,23 @@
 
 #include "xyo-win-window.hpp"
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
-		Window::Window() {
+		Window::Window()
+		{
 			hWnd_ = NULL;
 		};
 
-		Window::~Window() {
+		Window::~Window()
+		{
 			destroyAndWait_();
 		};
 
-		Window::operator HINSTANCE() {
+		Window::operator HINSTANCE()
+		{
 #ifdef XYO_APPLICATION_32BIT
 			return (HINSTANCE) GetWindowLong(hWnd_, GWL_HINSTANCE);
 #endif
@@ -32,29 +37,36 @@ namespace XYO {
 #endif
 		};
 
-		bool Window::destroyAndWait_() {
-			if (hWnd_ == NULL) {
+		bool Window::destroyAndWait_()
+		{
+			if (hWnd_ == NULL)
+			{
 				return false;
 			}
-			if (hWnd_ != NULL) {
+			if (hWnd_ != NULL)
+			{
 				DestroyWindow(hWnd_);
 			};
-			while (hWnd_ != NULL) {
+			while (hWnd_ != NULL)
+			{
 				WaitForSingleObject(GetCurrentThread(), 1);
 			};
 			return true;
 		};
 
-		LRESULT Window::windowProcedure(UINT uMsg, WPARAM wParam, LPARAM lParam) {
+		LRESULT Window::windowProcedure(UINT uMsg, WPARAM wParam, LPARAM lParam)
+		{
 			return DefWindowProc(hWnd_, uMsg, wParam, lParam);
 		};
 
 		LRESULT CALLBACK Window::windowProcedure_(HWND hWnd,
-				UINT uMsg,
-				WPARAM wParam,
-				LPARAM lParam) {
+			UINT uMsg,
+			WPARAM wParam,
+			LPARAM lParam)
+		{
 			Window *vWindow;
-			if (uMsg == WM_NCCREATE) {
+			if (uMsg == WM_NCCREATE)
+			{
 				vWindow = (Window *) (((LPCREATESTRUCT) lParam)->lpCreateParams);
 				vWindow->incReferenceCount();
 				vWindow->hWnd_ = hWnd;
@@ -66,7 +78,8 @@ namespace XYO {
 				SetWindowLongPtr(hWnd, 0, (LONG_PTR) vWindow);
 #endif
 
-				if (vWindow->notifyOnCreate_.isValid()) {
+				if (vWindow->notifyOnCreate_.isValid())
+				{
 					vWindow->notifyOnCreate_->notify();
 				};
 			};
@@ -77,8 +90,10 @@ namespace XYO {
 #ifdef XYO_APPLICATION_64BIT
 			vWindow = (Window *) GetWindowLongPtr(hWnd, 0);
 #endif
-			if (vWindow != NULL) {
-				if (uMsg == WM_NCDESTROY) {
+			if (vWindow != NULL)
+			{
+				if (uMsg == WM_NCDESTROY)
+				{
 
 #ifdef XYO_APPLICATION_32BIT
 					SetWindowLong(hWnd, 0, 0);
@@ -88,13 +103,16 @@ namespace XYO {
 #endif
 
 					LRESULT retVal = vWindow->windowProcedure(uMsg, wParam, lParam);
-					if (vWindow->notifyOnDestroy_.isValid()) {
+					if (vWindow->notifyOnDestroy_.isValid())
+					{
 						vWindow->notifyOnDestroy_->notify();
 					};
 					vWindow->hWnd_ = NULL;
 					vWindow->decReferenceCount();
 					return retVal;
-				} else {
+				}
+				else
+				{
 					return vWindow->windowProcedure(uMsg, wParam, lParam);
 				};
 			};
@@ -102,55 +120,63 @@ namespace XYO {
 		};
 
 		bool Window::create(DWORD dwExStyle,
-				    LPCTSTR lpClassName,
-				    LPCTSTR lpWindowName,
-				    DWORD dwStyle,
-				    int x, int y,
-				    int nWidth, int nHeight,
-				    HWND hWndParent,
-				    HMENU hMenu,
-				    HINSTANCE hInstance) {
+			LPCTSTR lpClassName,
+			LPCTSTR lpWindowName,
+			DWORD dwStyle,
+			int x, int y,
+			int nWidth, int nHeight,
+			HWND hWndParent,
+			HMENU hMenu,
+			HINSTANCE hInstance)
+		{
 			return (::CreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, this) != NULL);
 		};
 
 		bool Window::create(LPCTSTR lpClassName,
-				    LPCTSTR lpWindowName,
-				    DWORD dwStyle,
-				    int x, int y,
-				    int nWidth, int nHeight,
-				    HWND hWndParent,
-				    HMENU hMenu,
-				    HINSTANCE hInstance) {
+			LPCTSTR lpWindowName,
+			DWORD dwStyle,
+			int x, int y,
+			int nWidth, int nHeight,
+			HWND hWndParent,
+			HMENU hMenu,
+			HINSTANCE hInstance)
+		{
 			return (::CreateWindow(lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, this) != NULL);
 		};
 
-		bool Window::registerClass(WNDCLASS &wc) {
+		bool Window::registerClass(WNDCLASS &wc)
+		{
 			wc.lpfnWndProc = Window::windowProcedure_;
 			wc.cbWndExtra = sizeof (void *);
 			return ::RegisterClass(&wc) != 0;
 		};
 
-		bool Window::registerClass(WNDCLASSEX &wc) {
+		bool Window::registerClass(WNDCLASSEX &wc)
+		{
 			wc.cbSize = sizeof (WNDCLASSEX);
 			wc.lpfnWndProc = Window::windowProcedure_;
 			wc.cbWndExtra = sizeof (void *);
 			return ::RegisterClassEx(&wc) != 0;
 		};
 
-		void Window::setNotifyOnCreate(INotify *value) {
+		void Window::setNotifyOnCreate(INotify *value)
+		{
 			notifyOnCreate_ = value;
 		};
 
-		void Window::setNotifyOnDestroy(INotify *value) {
+		void Window::setNotifyOnDestroy(INotify *value)
+		{
 			notifyOnDestroy_ = value;
 		};
 
-		bool Window::translateAccelerator(MSG &msg) {
+		bool Window::translateAccelerator(MSG &msg)
+		{
 			msg;
 			return false;
 		};
 
-		void Window::initMemory() {
+		void Window::initMemory()
+		{
 			Core::TPointer<INotify>::initMemory();
 		};
 

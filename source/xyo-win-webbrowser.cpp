@@ -23,98 +23,143 @@
 #include "xyo-win-ole.hpp"
 #include "xyo-win-variant.hpp"
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		using namespace XYO;
 		using namespace XYO::Core;
 
-		WebBrowser::WebBrowser() {
+		WebBrowser::WebBrowser()
+		{
 			adviseCookie_ = 0;
 			browser_ = NULL;
 			connectionPoint_ = NULL;
 			oleInPlaceActiveObject_ = NULL;
-			browserDefaultAddress_="about:blank";
+			browserDefaultAddress_ = "about:blank";
 		};
 
-		WebBrowser::~WebBrowser() {
+		WebBrowser::~WebBrowser()
+		{
 		};
 
 		// IUnknown
 
-		HRESULT WebBrowser::QueryInterface(REFIID riid, LPVOID *ppvObj) {
-			if (memcmp(&riid, &IID_IUnknown, sizeof (GUID)) == 0) {
+		HRESULT WebBrowser::QueryInterface(REFIID riid, LPVOID *ppvObj)
+		{
+			if (memcmp(&riid, &IID_IUnknown, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IStorage *> (this);
-			} else if (memcmp(&riid, &IID_IStorage, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IStorage, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IStorage *> (this);
-			} else if (memcmp(&riid, &IID_IOleClientSite, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IOleClientSite, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IOleClientSite *> (this);
-			} else if (memcmp(&riid, &IID_IOleInPlaceSite, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IOleInPlaceSite, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IOleInPlaceSite *> (this);
-			} else if (memcmp(&riid, &IID_IOleInPlaceFrame, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IOleInPlaceFrame, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IOleInPlaceFrame *> (this);
-			} else if (memcmp(&riid, &IID_IDocHostUIHandler, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IDocHostUIHandler, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IDocHostUIHandler *> (this);
-			} else if (memcmp(&riid, &DIID_DWebBrowserEvents2, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &DIID_DWebBrowserEvents2, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<DWebBrowserEvents2 *> (this);
-			} else if (memcmp(&riid, &IID_IDispatch, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IDispatch, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IDispatch *> (this);
-			} else if (memcmp(&riid, &IID_IServiceProvider, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IServiceProvider, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IServiceProvider *> (this);
-			} else if (memcmp(&riid, &IID_IOleCommandTarget, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IOleCommandTarget, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IOleCommandTarget *> (this);
-			} else if (memcmp(&riid, &IID_IDropTarget, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IDropTarget, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IDropTarget *> (this);
-			} else if (memcmp(&riid, &IID_IHttpSecurity, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IHttpSecurity, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IHttpSecurity *> (this);
-			} else if (memcmp(&riid, &IID_IWindowForBindingUI, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IWindowForBindingUI, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IWindowForBindingUI *> (this);
-			} else if (memcmp(&riid, &IID_INewWindowManager, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_INewWindowManager, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<INewWindowManager *> (this);
-			} else if (memcmp(&riid, &IID_IAuthenticate, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IAuthenticate, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IAuthenticate *> (this);
-			} else if (memcmp(&riid, &IID_IInternetSecurityManager, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IInternetSecurityManager, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IInternetSecurityManager *> (this);
-			} else if (memcmp(&riid, &IID_IProtectFocus, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IProtectFocus, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IProtectFocus *> (this);
-			} else if (memcmp(&riid, &IID_IHTMLOMWindowServices, sizeof (GUID)) == 0) {
+			}
+			else if (memcmp(&riid, &IID_IHTMLOMWindowServices, sizeof (GUID)) == 0)
+			{
 				AddRef();
 				*ppvObj = static_cast<IHTMLOMWindowServices *> (this);
-			} else {
+			}
+			else
+			{
 				*ppvObj = NULL;
 				return (E_NOINTERFACE);
 			}
 			return (S_OK);
 		};
 
-		ULONG WebBrowser::AddRef() {
+		ULONG WebBrowser::AddRef()
+		{
 			return (ULONG)1;
 		};
 
-		ULONG WebBrowser::Release() {
+		ULONG WebBrowser::Release()
+		{
 			return (ULONG)1;
 		};
 
 		//IStorage
 
-		HRESULT WebBrowser::CreateStream(const WCHAR *pwcsName, DWORD grfMode, DWORD reserved1, DWORD reserved2, IStream **ppstm) {
+		HRESULT WebBrowser::CreateStream(const WCHAR *pwcsName, DWORD grfMode, DWORD reserved1, DWORD reserved2, IStream **ppstm)
+		{
 			pwcsName;
 			grfMode;
 			reserved1;
@@ -123,7 +168,8 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::OpenStream(const WCHAR *pwcsName, void *reserved1, DWORD grfMode, DWORD reserved2, IStream **ppstm) {
+		HRESULT WebBrowser::OpenStream(const WCHAR *pwcsName, void *reserved1, DWORD grfMode, DWORD reserved2, IStream **ppstm)
+		{
 			pwcsName;
 			reserved1;
 			grfMode;
@@ -132,7 +178,8 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::CreateStorage(const WCHAR *pwcsName, DWORD grfMode, DWORD reserved1, DWORD reserved2, IStorage **ppstg) {
+		HRESULT WebBrowser::CreateStorage(const WCHAR *pwcsName, DWORD grfMode, DWORD reserved1, DWORD reserved2, IStorage **ppstg)
+		{
 			pwcsName;
 			grfMode;
 			reserved1;
@@ -141,7 +188,8 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::OpenStorage(const WCHAR *pwcsName, IStorage *pstgPriority, DWORD grfMode, SNB snbExclude, DWORD reserved, IStorage **ppstg) {
+		HRESULT WebBrowser::OpenStorage(const WCHAR *pwcsName, IStorage *pstgPriority, DWORD grfMode, SNB snbExclude, DWORD reserved, IStorage **ppstg)
+		{
 			pwcsName;
 			pstgPriority;
 			grfMode;
@@ -151,7 +199,8 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::CopyTo(DWORD ciidExclude, IID const *rgiidExclude, SNB snbExclude, IStorage *pstgDest) {
+		HRESULT WebBrowser::CopyTo(DWORD ciidExclude, IID const *rgiidExclude, SNB snbExclude, IStorage *pstgDest)
+		{
 			ciidExclude;
 			rgiidExclude;
 			snbExclude;
@@ -159,7 +208,8 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::MoveElementTo(const OLECHAR *pwcsName, IStorage *pstgDest, const OLECHAR *pwcsNewName, DWORD grfFlags) {
+		HRESULT WebBrowser::MoveElementTo(const OLECHAR *pwcsName, IStorage *pstgDest, const OLECHAR *pwcsNewName, DWORD grfFlags)
+		{
 			pwcsName;
 			pstgDest;
 			pwcsNewName;
@@ -167,16 +217,19 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::Commit(DWORD grfCommitFlags) {
+		HRESULT WebBrowser::Commit(DWORD grfCommitFlags)
+		{
 			grfCommitFlags;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::Revert() {
+		HRESULT WebBrowser::Revert()
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::EnumElements(DWORD reserved1, void *reserved2, DWORD reserved3, IEnumSTATSTG **ppenum) {
+		HRESULT WebBrowser::EnumElements(DWORD reserved1, void *reserved2, DWORD reserved3, IEnumSTATSTG **ppenum)
+		{
 			reserved1;
 			reserved2;
 			reserved3;
@@ -184,18 +237,21 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::DestroyElement(const OLECHAR *pwcsName) {
+		HRESULT WebBrowser::DestroyElement(const OLECHAR *pwcsName)
+		{
 			pwcsName;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::RenameElement(const WCHAR *pwcsOldName, const WCHAR *pwcsNewName) {
+		HRESULT WebBrowser::RenameElement(const WCHAR *pwcsOldName, const WCHAR *pwcsNewName)
+		{
 			pwcsOldName;
 			pwcsNewName;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::SetElementTimes(const WCHAR *pwcsName, FILETIME const *pctime, FILETIME const *patime, FILETIME const *pmtime) {
+		HRESULT WebBrowser::SetElementTimes(const WCHAR *pwcsName, FILETIME const *pctime, FILETIME const *patime, FILETIME const *pmtime)
+		{
 			pwcsName;
 			pctime;
 			patime;
@@ -203,18 +259,21 @@ namespace XYO {
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::SetClass(REFCLSID clsid) {
+		HRESULT WebBrowser::SetClass(REFCLSID clsid)
+		{
 			clsid;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::SetStateBits(DWORD grfStateBits, DWORD grfMask) {
+		HRESULT WebBrowser::SetStateBits(DWORD grfStateBits, DWORD grfMask)
+		{
 			grfStateBits;
 			grfMask;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::Stat(STATSTG *pstatstg, DWORD grfStatFlag) {
+		HRESULT WebBrowser::Stat(STATSTG *pstatstg, DWORD grfStatFlag)
+		{
 			pstatstg;
 			grfStatFlag;
 			return (E_NOTIMPL);
@@ -222,66 +281,78 @@ namespace XYO {
 
 		//IOleInPlaceFrame
 
-		HRESULT WebBrowser::GetWindow(HWND FAR *lphwnd) {
+		HRESULT WebBrowser::GetWindow(HWND FAR *lphwnd)
+		{
 			*lphwnd = *this;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::ContextSensitiveHelp(BOOL fEnterMode) {
+		HRESULT WebBrowser::ContextSensitiveHelp(BOOL fEnterMode)
+		{
 			fEnterMode;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::GetBorder(LPRECT lprectBorder) {
+		HRESULT WebBrowser::GetBorder(LPRECT lprectBorder)
+		{
 			ZeroMemory(lprectBorder, sizeof (RECT));
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::RequestBorderSpace(LPCBORDERWIDTHS pborderwidths) {
+		HRESULT WebBrowser::RequestBorderSpace(LPCBORDERWIDTHS pborderwidths)
+		{
 			pborderwidths;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::SetBorderSpace(LPCBORDERWIDTHS pborderwidths) {
+		HRESULT WebBrowser::SetBorderSpace(LPCBORDERWIDTHS pborderwidths)
+		{
 			pborderwidths;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::SetActiveObject(IOleInPlaceActiveObject *pActiveObject, LPCOLESTR pszObjName) {
+		HRESULT WebBrowser::SetActiveObject(IOleInPlaceActiveObject *pActiveObject, LPCOLESTR pszObjName)
+		{
 			pActiveObject;
 			pszObjName;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::InsertMenus(HMENU hmenuShared, LPOLEMENUGROUPWIDTHS lpMenuWidths) {
+		HRESULT WebBrowser::InsertMenus(HMENU hmenuShared, LPOLEMENUGROUPWIDTHS lpMenuWidths)
+		{
 			hmenuShared;
 			lpMenuWidths;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::SetMenu(HMENU hmenuShared, HOLEMENU holemenu, HWND hwndActiveObject) {
+		HRESULT WebBrowser::SetMenu(HMENU hmenuShared, HOLEMENU holemenu, HWND hwndActiveObject)
+		{
 			hmenuShared;
 			holemenu;
 			hwndActiveObject;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::RemoveMenus(HMENU hmenuShared) {
+		HRESULT WebBrowser::RemoveMenus(HMENU hmenuShared)
+		{
 			hmenuShared;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::SetStatusText(LPCOLESTR pszStatusText) {
+		HRESULT WebBrowser::SetStatusText(LPCOLESTR pszStatusText)
+		{
 			pszStatusText;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::EnableModeless(BOOL fEnable) {
+		HRESULT WebBrowser::EnableModeless(BOOL fEnable)
+		{
 			fEnable;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::TranslateAccelerator(LPMSG lpmsg, WORD wID) {
+		HRESULT WebBrowser::TranslateAccelerator(LPMSG lpmsg, WORD wID)
+		{
 			lpmsg;
 			wID;
 			return (S_FALSE);
@@ -289,50 +360,60 @@ namespace XYO {
 
 		//IOleClientSite
 
-		HRESULT WebBrowser::SaveObject() {
+		HRESULT WebBrowser::SaveObject()
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::GetMoniker(DWORD dwAssign, DWORD dwWhichMoniker, IMoniker **ppmk) {
+		HRESULT WebBrowser::GetMoniker(DWORD dwAssign, DWORD dwWhichMoniker, IMoniker **ppmk)
+		{
 			dwAssign;
 			dwWhichMoniker;
 			ppmk;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::GetContainer(LPOLECONTAINER FAR *ppContainer) {
+		HRESULT WebBrowser::GetContainer(LPOLECONTAINER FAR *ppContainer)
+		{
 			ppContainer;
 			return (E_NOINTERFACE);
 		};
 
-		HRESULT WebBrowser::ShowObject() {
+		HRESULT WebBrowser::ShowObject()
+		{
 			return (NOERROR);
 		};
 
-		HRESULT WebBrowser::OnShowWindow(BOOL fShow) {
+		HRESULT WebBrowser::OnShowWindow(BOOL fShow)
+		{
 			fShow;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::RequestNewObjectLayout() {
+		HRESULT WebBrowser::RequestNewObjectLayout()
+		{
 			return (E_NOTIMPL);
 		};
 
 		//IOleInPlaceSite
 
-		HRESULT WebBrowser::CanInPlaceActivate() {
+		HRESULT WebBrowser::CanInPlaceActivate()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::OnInPlaceActivate() {
+		HRESULT WebBrowser::OnInPlaceActivate()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::OnUIActivate() {
+		HRESULT WebBrowser::OnUIActivate()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::GetWindowContext(LPOLEINPLACEFRAME FAR *lplpFrame, LPOLEINPLACEUIWINDOW FAR *lplpDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo) {
+		HRESULT WebBrowser::GetWindowContext(LPOLEINPLACEFRAME FAR *lplpFrame, LPOLEINPLACEUIWINDOW FAR *lplpDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo)
+		{
 			lprcPosRect;
 			lprcClipRect;
 			*lplpFrame = static_cast<LPOLEINPLACEFRAME> (this);
@@ -344,31 +425,38 @@ namespace XYO {
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::Scroll(SIZE scrollExtent) {
+		HRESULT WebBrowser::Scroll(SIZE scrollExtent)
+		{
 			scrollExtent;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::OnUIDeactivate(BOOL fUndoable) {
+		HRESULT WebBrowser::OnUIDeactivate(BOOL fUndoable)
+		{
 			fUndoable;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::OnInPlaceDeactivate() {
+		HRESULT WebBrowser::OnInPlaceDeactivate()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::DiscardUndoState() {
+		HRESULT WebBrowser::DiscardUndoState()
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::DeactivateAndUndo() {
+		HRESULT WebBrowser::DeactivateAndUndo()
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::OnPosRectChange(LPCRECT lprcPosRect) {
+		HRESULT WebBrowser::OnPosRectChange(LPCRECT lprcPosRect)
+		{
 			IOleInPlaceObject *inplace;
-			if (!browser_->QueryInterface(IID_IOleInPlaceObject, (void **) &inplace)) {
+			if (!browser_->QueryInterface(IID_IOleInPlaceObject, (void **) &inplace))
+			{
 				inplace->SetObjectRects(lprcPosRect, lprcPosRect);
 				inplace->Release();
 			};
@@ -377,7 +465,8 @@ namespace XYO {
 
 		//IDocHostUIHandler
 
-		HRESULT WebBrowser::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pcmdtReserved, IDispatch *pdispReserved) {
+		HRESULT WebBrowser::ShowContextMenu(DWORD dwID, POINT *ppt, IUnknown *pcmdtReserved, IDispatch *pdispReserved)
+		{
 			dwID;
 			ppt;
 			pcmdtReserved;
@@ -385,14 +474,16 @@ namespace XYO {
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::GetHostInfo(DOCHOSTUIINFO *pInfo) {
+		HRESULT WebBrowser::GetHostInfo(DOCHOSTUIINFO *pInfo)
+		{
 			pInfo->cbSize = sizeof (DOCHOSTUIINFO);
 			pInfo->dwFlags = DOCHOSTUIFLAG_THEME;
 			pInfo->dwDoubleClick = DOCHOSTUIDBLCLK_DEFAULT;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::ShowUI(DWORD dwID, IOleInPlaceActiveObject *pActiveObject, IOleCommandTarget *pCommandTarget, IOleInPlaceFrame *pFrame, IOleInPlaceUIWindow *pDoc) {
+		HRESULT WebBrowser::ShowUI(DWORD dwID, IOleInPlaceActiveObject *pActiveObject, IOleCommandTarget *pCommandTarget, IOleInPlaceFrame *pFrame, IOleInPlaceUIWindow *pDoc)
+		{
 			dwID;
 			pActiveObject;
 			pCommandTarget;
@@ -401,56 +492,66 @@ namespace XYO {
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::HideUI() {
+		HRESULT WebBrowser::HideUI()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::UpdateUI() {
+		HRESULT WebBrowser::UpdateUI()
+		{
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::OnDocWindowActivate(BOOL fActivate) {
+		HRESULT WebBrowser::OnDocWindowActivate(BOOL fActivate)
+		{
 			fActivate;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::OnFrameWindowActivate(BOOL fActivate) {
+		HRESULT WebBrowser::OnFrameWindowActivate(BOOL fActivate)
+		{
 			fActivate;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::ResizeBorder(LPCRECT prcBorder, IOleInPlaceUIWindow *pUIWindow, BOOL fRameWindow) {
+		HRESULT WebBrowser::ResizeBorder(LPCRECT prcBorder, IOleInPlaceUIWindow *pUIWindow, BOOL fRameWindow)
+		{
 			prcBorder;
 			pUIWindow;
 			fRameWindow;
 			return (S_OK);
 		};
 
-		HRESULT WebBrowser::TranslateAccelerator(LPMSG lpMsg, const GUID *pguidCmdGroup, DWORD nCmdID) {
+		HRESULT WebBrowser::TranslateAccelerator(LPMSG lpMsg, const GUID *pguidCmdGroup, DWORD nCmdID)
+		{
 			lpMsg;
 			pguidCmdGroup;
 			nCmdID;
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::GetOptionKeyPath(LPOLESTR *pchKey, DWORD dw) {
+		HRESULT WebBrowser::GetOptionKeyPath(LPOLESTR *pchKey, DWORD dw)
+		{
 			pchKey;
 			dw;
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::GetDropTarget(IDropTarget *pDropTarget, IDropTarget **ppDropTarget) {
+		HRESULT WebBrowser::GetDropTarget(IDropTarget *pDropTarget, IDropTarget **ppDropTarget)
+		{
 			pDropTarget;
 			ppDropTarget;
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::GetExternal(IDispatch **ppDispatch) {
+		HRESULT WebBrowser::GetExternal(IDispatch **ppDispatch)
+		{
 			*ppDispatch = (0);
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::TranslateUrl(DWORD dwTranslate, OLECHAR *pchURLIn, OLECHAR **ppchURLOut) {
+		HRESULT WebBrowser::TranslateUrl(DWORD dwTranslate, OLECHAR *pchURLIn, OLECHAR **ppchURLOut)
+		{
 			dwTranslate;
 			pchURLIn;
 			ppchURLOut;
@@ -458,7 +559,8 @@ namespace XYO {
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::FilterDataObject(IDataObject *pDO, IDataObject **ppDORet) {
+		HRESULT WebBrowser::FilterDataObject(IDataObject *pDO, IDataObject **ppDORet)
+		{
 			pDO;
 			*ppDORet = 0;
 			return (S_FALSE);
@@ -466,7 +568,8 @@ namespace XYO {
 
 		//IDocHostShowUI
 
-		HRESULT WebBrowser::ShowHelp(HWND hwnd, LPOLESTR pszHelpFile, UINT uCommand, DWORD dwData, POINT ptMouse, IDispatch *pDispatchObjectHit) {
+		HRESULT WebBrowser::ShowHelp(HWND hwnd, LPOLESTR pszHelpFile, UINT uCommand, DWORD dwData, POINT ptMouse, IDispatch *pDispatchObjectHit)
+		{
 			hwnd;
 			pszHelpFile;
 			uCommand;
@@ -476,7 +579,8 @@ namespace XYO {
 			return (S_FALSE);
 		};
 
-		HRESULT WebBrowser::ShowMessage(HWND hwnd, LPOLESTR lpstrText, LPOLESTR lpstrCaption, DWORD dwType, LPOLESTR lpstrHelpFile, DWORD dwHelpContext, LRESULT *plResult) {
+		HRESULT WebBrowser::ShowMessage(HWND hwnd, LPOLESTR lpstrText, LPOLESTR lpstrCaption, DWORD dwType, LPOLESTR lpstrHelpFile, DWORD dwHelpContext, LRESULT *plResult)
+		{
 			hwnd;
 			lpstrText;
 			lpstrCaption;
@@ -490,15 +594,18 @@ namespace XYO {
 
 		//DWebBrowserEvents2
 
-		HRESULT WebBrowser::GetTypeInfoCount(UINT *) {
+		HRESULT WebBrowser::GetTypeInfoCount(UINT *)
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::GetTypeInfo(UINT, LCID, LPTYPEINFO *) {
+		HRESULT WebBrowser::GetTypeInfo(UINT, LCID, LPTYPEINFO *)
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT WebBrowser::GetIDsOfNames(REFIID, LPOLESTR *names, UINT count, LCID, DISPID *outID) {
+		HRESULT WebBrowser::GetIDsOfNames(REFIID, LPOLESTR *names, UINT count, LCID, DISPID *outID)
+		{
 			names;
 			count;
 			outID;
@@ -507,12 +614,16 @@ namespace XYO {
 
 		//IServiceProvider
 
-		HRESULT WebBrowser::QueryService(REFGUID guidService, REFIID riid, void **ppv) {
+		HRESULT WebBrowser::QueryService(REFGUID guidService, REFIID riid, void **ppv)
+		{
 			guidService;
-			if (memcmp(&riid, &IID_IOleCommandTarget, sizeof (GUID) == 0)) {
+			if (memcmp(&riid, &IID_IOleCommandTarget, sizeof (GUID) == 0))
+			{
 				AddRef();
 				*ppv = static_cast<IOleCommandTarget *> (this);
-			} else {
+			}
+			else
+			{
 				*ppv = NULL;
 				return (E_NOINTERFACE);
 			};
@@ -521,7 +632,8 @@ namespace XYO {
 
 		//IOleCommandTarget
 
-		HRESULT WebBrowser::QueryStatus(const GUID *pguidCmdGroup, ULONG cCmds, OLECMD prgCmds[ ], OLECMDTEXT *pCmdText) {
+		HRESULT WebBrowser::QueryStatus(const GUID *pguidCmdGroup, ULONG cCmds, OLECMD prgCmds[ ], OLECMDTEXT *pCmdText)
+		{
 			pguidCmdGroup;
 			cCmds;
 			prgCmds;
@@ -529,7 +641,8 @@ namespace XYO {
 			return (OLECMDERR_E_UNKNOWNGROUP);
 		};
 
-		HRESULT WebBrowser::Exec(const GUID *pguidCmdGroup, DWORD nCmdID, DWORD nCmdexecopt, VARIANT *pvaIn, VARIANT *pvaOut) {
+		HRESULT WebBrowser::Exec(const GUID *pguidCmdGroup, DWORD nCmdID, DWORD nCmdexecopt, VARIANT *pvaIn, VARIANT *pvaOut)
+		{
 			pguidCmdGroup;
 			nCmdID;
 			nCmdexecopt;
@@ -538,22 +651,24 @@ namespace XYO {
 			return (OLECMDERR_E_UNKNOWNGROUP);
 		};
 
-		HRESULT WebBrowser::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr) {
+		HRESULT WebBrowser::Invoke(DISPID dispIdMember, REFIID riid, LCID lcid, WORD wFlags, DISPPARAMS *pDispParams, VARIANT *pVarResult, EXCEPINFO *pExcepInfo, UINT *puArgErr)
+		{
 			puArgErr;
 			pExcepInfo;
 			pVarResult;
 			wFlags;
 			lcid;
 			riid;
-			switch (dispIdMember) {
+			switch (dispIdMember)
+			{
 				case DISPID_BEFORENAVIGATE2:
 					BeforeNavigate2(pDispParams->rgvarg[6].pdispVal, // pDisp
-							pDispParams->rgvarg[5].pvarVal, // url
-							pDispParams->rgvarg[4].pvarVal, // Flags
-							pDispParams->rgvarg[3].pvarVal, // TargetFrameName
-							pDispParams->rgvarg[2].pvarVal, // PostData
-							pDispParams->rgvarg[1].pvarVal, // Headers
-							pDispParams->rgvarg[0].pboolVal); // Cancel
+						pDispParams->rgvarg[5].pvarVal, // url
+						pDispParams->rgvarg[4].pvarVal, // Flags
+						pDispParams->rgvarg[3].pvarVal, // TargetFrameName
+						pDispParams->rgvarg[2].pvarVal, // PostData
+						pDispParams->rgvarg[1].pvarVal, // Headers
+						pDispParams->rgvarg[0].pboolVal); // Cancel
 					break;
 				case DISPID_CLIENTTOHOSTWINDOW:
 					ClientToHostWindow(pDispParams->rgvarg[1].plVal, pDispParams->rgvarg[0].plVal);
@@ -651,227 +766,280 @@ namespace XYO {
 			return (S_OK);
 		};
 
-		void WebBrowser::StatusTextChange(BSTR) {
+		void WebBrowser::StatusTextChange(BSTR)
+		{
 		};
 
-		void WebBrowser::ProgressChange(long, long) {
+		void WebBrowser::ProgressChange(long, long)
+		{
 		};
 
-		void WebBrowser::CommandStateChange(long, VARIANT_BOOL) {
+		void WebBrowser::CommandStateChange(long, VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::DownloadBegin() {
+		void WebBrowser::DownloadBegin()
+		{
 		};
 
-		void WebBrowser::DownloadComplete() {
+		void WebBrowser::DownloadComplete()
+		{
 		};
 
-		void WebBrowser::TitleChange(BSTR) {
+		void WebBrowser::TitleChange(BSTR)
+		{
 		};
 
-		void WebBrowser::PropertyChange(BSTR) {
+		void WebBrowser::PropertyChange(BSTR)
+		{
 		};
 
-		void WebBrowser::BeforeNavigate2(IDispatch *, VARIANT *, VARIANT *, VARIANT *, VARIANT *, VARIANT *, VARIANT_BOOL *) {
+		void WebBrowser::BeforeNavigate2(IDispatch *, VARIANT *, VARIANT *, VARIANT *, VARIANT *, VARIANT *, VARIANT_BOOL *)
+		{
 		};
 
-		void WebBrowser::NewWindow2(IDispatch **, VARIANT_BOOL *) {
+		void WebBrowser::NewWindow2(IDispatch **, VARIANT_BOOL *)
+		{
 		};
 
-		void WebBrowser::NavigateComplete(IDispatch *, VARIANT *) {
+		void WebBrowser::NavigateComplete(IDispatch *, VARIANT *)
+		{
 		};
 
-		void WebBrowser::NavigateError(IDispatch *, VARIANT *, VARIANT *, VARIANT *, VARIANT_BOOL *) {
+		void WebBrowser::NavigateError(IDispatch *, VARIANT *, VARIANT *, VARIANT *, VARIANT_BOOL *)
+		{
 		};
 
-		void WebBrowser::DocumentComplete(IDispatch *, VARIANT *) {
+		void WebBrowser::DocumentComplete(IDispatch *, VARIANT *)
+		{
 		};
 
-		void WebBrowser::OnQuit() {
+		void WebBrowser::OnQuit()
+		{
 			PostMessage(*this, WM_CLOSE, 0, 0);
 		};
 
-		void WebBrowser::OnVisible(VARIANT_BOOL) {
+		void WebBrowser::OnVisible(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::OnToolBar(VARIANT_BOOL) {
+		void WebBrowser::OnToolBar(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::OnMenuBar(VARIANT_BOOL) {
+		void WebBrowser::OnMenuBar(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::OnStatusBar(VARIANT_BOOL) {
+		void WebBrowser::OnStatusBar(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::OnFullScreen(VARIANT_BOOL) {
+		void WebBrowser::OnFullScreen(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::OnTheaterMode(VARIANT_BOOL) {
+		void WebBrowser::OnTheaterMode(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::WindowSetResizable(VARIANT_BOOL) {
+		void WebBrowser::WindowSetResizable(VARIANT_BOOL)
+		{
 		};
 
-		void WebBrowser::WindowSetLeft(long Value) {
+		void WebBrowser::WindowSetLeft(long Value)
+		{
 			Value;
 		};
 
-		void WebBrowser::WindowSetTop(long Value) {
+		void WebBrowser::WindowSetTop(long Value)
+		{
 			Value;
 		};
 
-		void WebBrowser::WindowSetWidth(long Value) {
+		void WebBrowser::WindowSetWidth(long Value)
+		{
 			Value;
 		};
 
-		void WebBrowser::WindowSetHeight(long Value) {
+		void WebBrowser::WindowSetHeight(long Value)
+		{
 			Value;
 		};
 
-		void WebBrowser::WindowClosing(VARIANT_BOOL isChild, VARIANT_BOOL *allow) {
+		void WebBrowser::WindowClosing(VARIANT_BOOL isChild, VARIANT_BOOL *allow)
+		{
 			isChild;
 			*allow = VARIANT_TRUE;
 			PostMessage(*this, WM_CLOSE, 0, 0);
 		};
 
-		void WebBrowser::ClientToHostWindow(long *x, long *y) {
-			x,y;
+		void WebBrowser::ClientToHostWindow(long *x, long *y)
+		{
+			x, y;
 		};
 
-		void WebBrowser::SetSecureLockIcon(long x) {
+		void WebBrowser::SetSecureLockIcon(long x)
+		{
 			x;
 		};
 
-		void WebBrowser::FileDownload(VARIANT_BOOL *x) {
+		void WebBrowser::FileDownload(VARIANT_BOOL *x)
+		{
 			x;
 		};
 
-		void WebBrowser::PrintTemplateInstantiation(IDispatch *x) {
+		void WebBrowser::PrintTemplateInstantiation(IDispatch *x)
+		{
 			x;
 		};
 
-		void WebBrowser::PrintTemplateTeardown(IDispatch *x) {
+		void WebBrowser::PrintTemplateTeardown(IDispatch *x)
+		{
 			x;
 		};
 
-		void WebBrowser::PrivacyImpactedStateChange(VARIANT_BOOL x) {
+		void WebBrowser::PrivacyImpactedStateChange(VARIANT_BOOL x)
+		{
 			x;
 		};
 
 
 		//IDropTarget
-		HRESULT STDMETHODCALLTYPE WebBrowser::DragEnter(IDataObject *pDataObj,DWORD grfKeyState,POINTL pt,DWORD *pdwEffect) {
-			pDataObj,grfKeyState,pt,pdwEffect;
+		HRESULT STDMETHODCALLTYPE WebBrowser::DragEnter(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect)
+		{
+			pDataObj, grfKeyState, pt, pdwEffect;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::DragOver(DWORD grfKeyState,POINTL pt,DWORD *pdwEffect) {
-			grfKeyState,pt,pdwEffect;
+		HRESULT STDMETHODCALLTYPE WebBrowser::DragOver(DWORD grfKeyState, POINTL pt, DWORD *pdwEffect)
+		{
+			grfKeyState, pt, pdwEffect;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::DragLeave(void) {
+		HRESULT STDMETHODCALLTYPE WebBrowser::DragLeave(void)
+		{
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::Drop(IDataObject *pDataObj,DWORD grfKeyState,POINTL pt,DWORD *pdwEffect) {
-			pDataObj,grfKeyState,pt,pdwEffect;
+		HRESULT STDMETHODCALLTYPE WebBrowser::Drop(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect)
+		{
+			pDataObj, grfKeyState, pt, pdwEffect;
 			return (E_NOTIMPL);
 		};
 
 		//IHttpSecurity
-		HRESULT STDMETHODCALLTYPE WebBrowser::OnSecurityProblem(DWORD dwProblem) {
+		HRESULT STDMETHODCALLTYPE WebBrowser::OnSecurityProblem(DWORD dwProblem)
+		{
 			dwProblem;
 			return (E_NOTIMPL);
 		};
 
 		//IWindowForBindingUI
-		HRESULT STDMETHODCALLTYPE WebBrowser::GetWindow(REFGUID rguidReason,HWND *phwnd) {
-			rguidReason,phwnd;
+		HRESULT STDMETHODCALLTYPE WebBrowser::GetWindow(REFGUID rguidReason, HWND *phwnd)
+		{
+			rguidReason, phwnd;
 			return (E_NOTIMPL);
 		};
 
 		//INewWindowManager
-		HRESULT STDMETHODCALLTYPE WebBrowser::EvaluateNewWindow(LPCWSTR pszUrl,LPCWSTR pszName,LPCWSTR pszUrlContext,LPCWSTR pszFeatures,BOOL fReplace,DWORD dwFlags,DWORD dwUserActionTime) {
-			pszUrl,pszName,pszUrlContext,pszFeatures,fReplace,dwFlags,dwUserActionTime;
+		HRESULT STDMETHODCALLTYPE WebBrowser::EvaluateNewWindow(LPCWSTR pszUrl, LPCWSTR pszName, LPCWSTR pszUrlContext, LPCWSTR pszFeatures, BOOL fReplace, DWORD dwFlags, DWORD dwUserActionTime)
+		{
+			pszUrl, pszName, pszUrlContext, pszFeatures, fReplace, dwFlags, dwUserActionTime;
 			return (E_NOTIMPL);
 		};
 
 		//IAuthenticate
-		HRESULT STDMETHODCALLTYPE WebBrowser::Authenticate(HWND *phwnd,LPWSTR *pszUsername,LPWSTR *pszPassword) {
-			phwnd,pszUsername,pszPassword;
+		HRESULT STDMETHODCALLTYPE WebBrowser::Authenticate(HWND *phwnd, LPWSTR *pszUsername, LPWSTR *pszPassword)
+		{
+			phwnd, pszUsername, pszPassword;
 			return (E_NOTIMPL);
 		};
 
 		//IInternetSecurityManager
-		HRESULT STDMETHODCALLTYPE WebBrowser::SetSecuritySite(IInternetSecurityMgrSite *pSite) {
+		HRESULT STDMETHODCALLTYPE WebBrowser::SetSecuritySite(IInternetSecurityMgrSite *pSite)
+		{
 			pSite;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::GetSecuritySite(IInternetSecurityMgrSite **ppSite) {
+		HRESULT STDMETHODCALLTYPE WebBrowser::GetSecuritySite(IInternetSecurityMgrSite **ppSite)
+		{
 			ppSite;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::MapUrlToZone(LPCWSTR pwszUrl,DWORD *pdwZone,DWORD dwFlags) {
-			pwszUrl,pdwZone,dwFlags;
+		HRESULT STDMETHODCALLTYPE WebBrowser::MapUrlToZone(LPCWSTR pwszUrl, DWORD *pdwZone, DWORD dwFlags)
+		{
+			pwszUrl, pdwZone, dwFlags;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::GetSecurityId(LPCWSTR pwszUrl,BYTE *pbSecurityId,DWORD *pcbSecurityId,DWORD_PTR dwReserved) {
-			pwszUrl,pbSecurityId,pcbSecurityId,dwReserved;
+		HRESULT STDMETHODCALLTYPE WebBrowser::GetSecurityId(LPCWSTR pwszUrl, BYTE *pbSecurityId, DWORD *pcbSecurityId, DWORD_PTR dwReserved)
+		{
+			pwszUrl, pbSecurityId, pcbSecurityId, dwReserved;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::ProcessUrlAction(LPCWSTR pwszUrl,DWORD dwAction,BYTE *pPolicy,DWORD cbPolicy,BYTE *pContext,DWORD cbContext,DWORD dwFlags,DWORD dwReserved) {
-			pwszUrl,dwAction,pPolicy,cbPolicy,pContext,cbContext,dwFlags,dwReserved;
+		HRESULT STDMETHODCALLTYPE WebBrowser::ProcessUrlAction(LPCWSTR pwszUrl, DWORD dwAction, BYTE *pPolicy, DWORD cbPolicy, BYTE *pContext, DWORD cbContext, DWORD dwFlags, DWORD dwReserved)
+		{
+			pwszUrl, dwAction, pPolicy, cbPolicy, pContext, cbContext, dwFlags, dwReserved;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::QueryCustomPolicy(LPCWSTR pwszUrl,REFGUID guidKey,BYTE **ppPolicy,DWORD *pcbPolicy,BYTE *pContext,DWORD cbContext,DWORD dwReserved) {
-			pwszUrl,guidKey,ppPolicy,pcbPolicy,pContext,cbContext,dwReserved;
+		HRESULT STDMETHODCALLTYPE WebBrowser::QueryCustomPolicy(LPCWSTR pwszUrl, REFGUID guidKey, BYTE **ppPolicy, DWORD *pcbPolicy, BYTE *pContext, DWORD cbContext, DWORD dwReserved)
+		{
+			pwszUrl, guidKey, ppPolicy, pcbPolicy, pContext, cbContext, dwReserved;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::SetZoneMapping(DWORD dwZone,LPCWSTR lpszPattern,DWORD dwFlags) {
-			dwZone,lpszPattern,dwFlags;
+		HRESULT STDMETHODCALLTYPE WebBrowser::SetZoneMapping(DWORD dwZone, LPCWSTR lpszPattern, DWORD dwFlags)
+		{
+			dwZone, lpszPattern, dwFlags;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::GetZoneMappings(DWORD dwZone,IEnumString **ppenumString,DWORD dwFlags) {
-			dwZone,ppenumString,dwFlags;
+		HRESULT STDMETHODCALLTYPE WebBrowser::GetZoneMappings(DWORD dwZone, IEnumString **ppenumString, DWORD dwFlags)
+		{
+			dwZone, ppenumString, dwFlags;
 			return (E_NOTIMPL);
 		};
 
 		//IProtectFocus
-		HRESULT STDMETHODCALLTYPE WebBrowser::AllowFocusChange(BOOL *pfAllow) {
+		HRESULT STDMETHODCALLTYPE WebBrowser::AllowFocusChange(BOOL *pfAllow)
+		{
 			pfAllow;
 			return (E_NOTIMPL);
 		};
 
 		//IHTMLOMWindowServices
-		HRESULT STDMETHODCALLTYPE WebBrowser::moveTo(LONG x,LONG y) {
-			x,y;
+		HRESULT STDMETHODCALLTYPE WebBrowser::moveTo(LONG x, LONG y)
+		{
+			x, y;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::moveBy(LONG x,LONG y) {
-			x,y;
+		HRESULT STDMETHODCALLTYPE WebBrowser::moveBy(LONG x, LONG y)
+		{
+			x, y;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::resizeTo(LONG x,LONG y) {
-			x,y;
+		HRESULT STDMETHODCALLTYPE WebBrowser::resizeTo(LONG x, LONG y)
+		{
+			x, y;
 			return (E_NOTIMPL);
 		};
 
-		HRESULT STDMETHODCALLTYPE WebBrowser::resizeBy(LONG x,LONG y) {
-			x,y;
+		HRESULT STDMETHODCALLTYPE WebBrowser::resizeBy(LONG x, LONG y)
+		{
+			x, y;
 			return (E_NOTIMPL);
 		};
 
-		int WebBrowser::connectObject() {
+		int WebBrowser::connectObject()
+		{
 			IWebBrowser2 *webBrowser2;
 			IConnectionPointContainer *conPtCon;
 			RECT rect;
@@ -880,28 +1048,36 @@ namespace XYO {
 			adviseCookie_ = 0;
 			retVal = 0;
 
-			if (!Ole::isValid()) {
+			if (!Ole::isValid())
+			{
 				return 0;
 			};
 
 			releaseObject();
 
-			if (OleCreate(CLSID_WebBrowser, IID_IOleObject, OLERENDER_DRAW, 0, (IOleClientSite *)this, (IStorage *)this, (void **) &browser_) == S_OK) {
+			if (OleCreate(CLSID_WebBrowser, IID_IOleObject, OLERENDER_DRAW, 0, (IOleClientSite *)this, (IStorage *)this, (void **) &browser_) == S_OK)
+			{
 				browser_->SetHostNames(L"Microsoft Internet Explorer", 0);
 				GetClientRect(*this, &rect);
 				browser_->AddRef();
-				if (!OleSetContainedObject((struct IUnknown *) browser_, TRUE)) {
-					if (!browser_->DoVerb(OLEIVERB_SHOW, NULL, (IOleClientSite *)this, -1, *this, &rect)) {
-						if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &webBrowser2)) {
-							if (!webBrowser2->QueryInterface(IID_IConnectionPointContainer, (void **) &conPtCon)) {
-								if (!conPtCon->FindConnectionPoint(DIID_DWebBrowserEvents2, &connectionPoint_)) {
+				if (!OleSetContainedObject((struct IUnknown *) browser_, TRUE))
+				{
+					if (!browser_->DoVerb(OLEIVERB_SHOW, NULL, (IOleClientSite *)this, -1, *this, &rect))
+					{
+						if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &webBrowser2))
+						{
+							if (!webBrowser2->QueryInterface(IID_IConnectionPointContainer, (void **) &conPtCon))
+							{
+								if (!conPtCon->FindConnectionPoint(DIID_DWebBrowserEvents2, &connectionPoint_))
+								{
 									connectionPoint_->Advise((DWebBrowserEvents2 *)this, &adviseCookie_);
 									retVal = 1;
 								};
 								conPtCon->Release();
 							};
 
-							if (browser_->QueryInterface(IID_IOleInPlaceActiveObject, (void **) &oleInPlaceActiveObject_) != S_OK) {
+							if (browser_->QueryInterface(IID_IOleInPlaceActiveObject, (void **) &oleInPlaceActiveObject_) != S_OK)
+							{
 								oleInPlaceActiveObject_ = NULL;
 							};
 
@@ -909,7 +1085,8 @@ namespace XYO {
 						};
 					};
 				};
-				if (retVal == 0) {
+				if (retVal == 0)
+				{
 					browser_->Close(OLECLOSE_NOSAVE);
 					browser_->Release();
 					browser_ = NULL;
@@ -918,17 +1095,21 @@ namespace XYO {
 			return retVal;
 		};
 
-		int WebBrowser::releaseObject() {
-			if (oleInPlaceActiveObject_ != NULL) {
+		int WebBrowser::releaseObject()
+		{
+			if (oleInPlaceActiveObject_ != NULL)
+			{
 				oleInPlaceActiveObject_->Release();
 				oleInPlaceActiveObject_ = NULL;
 			};
-			if (connectionPoint_ != NULL) {
+			if (connectionPoint_ != NULL)
+			{
 				connectionPoint_->Unadvise(adviseCookie_);
 				connectionPoint_->Release();
 				connectionPoint_ = NULL;
 			};
-			if (browser_ != NULL) {
+			if (browser_ != NULL)
+			{
 				browser_->Close(OLECLOSE_NOSAVE);
 				browser_->Release();
 				browser_ = NULL;
@@ -936,20 +1117,25 @@ namespace XYO {
 			return 1;
 		};
 
-		LRESULT WebBrowser::windowProcedure(UINT uMsg, WPARAM wParam, LPARAM lParam) {
-			switch (uMsg) {
+		LRESULT WebBrowser::windowProcedure(UINT uMsg, WPARAM wParam, LPARAM lParam)
+		{
+			switch (uMsg)
+			{
 				case WM_CREATE:
-					if (!connectObject()) {
+					if (!connectObject())
+					{
 						return -1L;
 					}
-					PostMessage(*this,WUM_BROWSER_DO_NAVIGATE1,0,0);
+					PostMessage(*this, WUM_BROWSER_DO_NAVIGATE1, 0, 0);
 					break;
-				case WUM_BROWSER_DO_NAVIGATE1: {
+				case WUM_BROWSER_DO_NAVIGATE1:
+					{
 						Navigate("about:blank");
-						PostMessage(*this,WUM_BROWSER_DO_NAVIGATE2,0,0);
+						PostMessage(*this, WUM_BROWSER_DO_NAVIGATE2, 0, 0);
 						return 0L;
 					};
-				case WUM_BROWSER_DO_NAVIGATE2: {
+				case WUM_BROWSER_DO_NAVIGATE2:
+					{
 						Navigate(browserDefaultAddress_);
 						return 0L;
 					};
@@ -959,9 +1145,11 @@ namespace XYO {
 				case WM_DESTROY:
 					releaseObject();
 					break;
-				case WM_SIZE: {
+				case WM_SIZE:
+					{
 						::IWebBrowser2 *iWebBrowser2_;
-						if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &iWebBrowser2_)) {
+						if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &iWebBrowser2_))
+						{
 							iWebBrowser2_->put_Width(LOWORD(lParam));
 							iWebBrowser2_->put_Height(HIWORD(lParam));
 							iWebBrowser2_->Release();
@@ -974,27 +1162,34 @@ namespace XYO {
 			return 0L;
 		};
 
-		bool WebBrowser::translateAccelerator(MSG &msg) {
-			if(oleInPlaceActiveObject_ == NULL) {
+		bool WebBrowser::translateAccelerator(MSG &msg)
+		{
+			if(oleInPlaceActiveObject_ == NULL)
+			{
 				return false;
 			};
-			if(msg.hwnd==*this||IsChild(*this,msg.hwnd)) {
-				if (oleInPlaceActiveObject_->TranslateAccelerator(&msg) == S_OK) {
+			if(msg.hwnd == *this || IsChild(*this, msg.hwnd))
+			{
+				if (oleInPlaceActiveObject_->TranslateAccelerator(&msg) == S_OK)
+				{
 					return true;
 				};
 			};
 			return false;
 		};
 
-		int WebBrowser::Navigate(String url) {
+		int WebBrowser::Navigate(String url)
+		{
 			IWebBrowser2 *WebBrowser2;
 			VARIANT myURL;
 
-			if (browser_ == NULL) {
+			if (browser_ == NULL)
+			{
 				return 0;
 			}
 
-			if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &WebBrowser2)) {
+			if (!browser_->QueryInterface(IID_IWebBrowser2, (void **) &WebBrowser2))
+			{
 
 				size_t newSize = url.length() + 1;
 				wchar_t *url_ = new wchar_t[newSize];

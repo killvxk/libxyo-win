@@ -17,8 +17,10 @@
 #define WUM_BROWSER_DO_NAVIGATE1 (WM_USER+2000)
 #define WUM_BROWSER_DO_NAVIGATE2 (WM_USER+2001)
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class WebBrowser :
 			public virtual Window,
@@ -38,7 +40,8 @@ namespace XYO {
 			public virtual ::IAuthenticate,
 			public virtual ::IInternetSecurityManager,
 			public virtual ::IProtectFocus,
-			public virtual ::IHTMLOMWindowServices {
+			public virtual ::IHTMLOMWindowServices
+		{
 				XYO_CORE_DISALLOW_COPY_ASSIGN_MOVE(WebBrowser);
 			protected:
 				IOleObject *browser_;
@@ -182,45 +185,46 @@ namespace XYO {
 				XYO_WIN_EXPORT virtual void STDMETHODCALLTYPE PrivacyImpactedStateChange(VARIANT_BOOL);
 
 				//IDropTarget
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE DragEnter(IDataObject *pDataObj,DWORD grfKeyState,POINTL pt,DWORD *pdwEffect);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE DragOver(DWORD grfKeyState,POINTL pt,DWORD *pdwEffect);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE DragEnter(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE DragOver(DWORD grfKeyState, POINTL pt, DWORD *pdwEffect);
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE DragLeave(void);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE Drop(IDataObject *pDataObj,DWORD grfKeyState,POINTL pt,DWORD *pdwEffect);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE Drop(IDataObject *pDataObj, DWORD grfKeyState, POINTL pt, DWORD *pdwEffect);
 
 				//IHttpSecurity
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE OnSecurityProblem(DWORD dwProblem);
 
 				//IWindowForBindingUI
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetWindow(REFGUID rguidReason,HWND *phwnd);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetWindow(REFGUID rguidReason, HWND *phwnd);
 
 				//INewWindowManager
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE EvaluateNewWindow(LPCWSTR pszUrl,LPCWSTR pszName,LPCWSTR pszUrlContext,LPCWSTR pszFeatures,BOOL fReplace,DWORD dwFlags,DWORD dwUserActionTime);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE EvaluateNewWindow(LPCWSTR pszUrl, LPCWSTR pszName, LPCWSTR pszUrlContext, LPCWSTR pszFeatures, BOOL fReplace, DWORD dwFlags, DWORD dwUserActionTime);
 
 				//IAuthenticate
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE Authenticate(HWND *phwnd,LPWSTR *pszUsername,LPWSTR *pszPassword);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE Authenticate(HWND *phwnd, LPWSTR *pszUsername, LPWSTR *pszPassword);
 
 				//IInternetSecurityManager
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE SetSecuritySite(IInternetSecurityMgrSite *pSite);
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetSecuritySite(IInternetSecurityMgrSite **ppSite);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE MapUrlToZone(LPCWSTR pwszUrl,DWORD *pdwZone,DWORD dwFlags);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetSecurityId(LPCWSTR pwszUrl,BYTE *pbSecurityId,DWORD *pcbSecurityId,DWORD_PTR dwReserved);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE ProcessUrlAction(LPCWSTR pwszUrl,DWORD dwAction,BYTE *pPolicy,DWORD cbPolicy,BYTE *pContext,DWORD cbContext,DWORD dwFlags,DWORD dwReserved);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE QueryCustomPolicy(LPCWSTR pwszUrl,REFGUID guidKey,BYTE **ppPolicy,DWORD *pcbPolicy,BYTE *pContext,DWORD cbContext,DWORD dwReserved);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE SetZoneMapping(DWORD dwZone,LPCWSTR lpszPattern,DWORD dwFlags);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetZoneMappings(DWORD dwZone,IEnumString **ppenumString,DWORD dwFlags);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE MapUrlToZone(LPCWSTR pwszUrl, DWORD *pdwZone, DWORD dwFlags);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetSecurityId(LPCWSTR pwszUrl, BYTE *pbSecurityId, DWORD *pcbSecurityId, DWORD_PTR dwReserved);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE ProcessUrlAction(LPCWSTR pwszUrl, DWORD dwAction, BYTE *pPolicy, DWORD cbPolicy, BYTE *pContext, DWORD cbContext, DWORD dwFlags, DWORD dwReserved);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE QueryCustomPolicy(LPCWSTR pwszUrl, REFGUID guidKey, BYTE **ppPolicy, DWORD *pcbPolicy, BYTE *pContext, DWORD cbContext, DWORD dwReserved);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE SetZoneMapping(DWORD dwZone, LPCWSTR lpszPattern, DWORD dwFlags);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE GetZoneMappings(DWORD dwZone, IEnumString **ppenumString, DWORD dwFlags);
 
 				//IProtectFocus
 				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE AllowFocusChange(BOOL *pfAllow);
 
 				//IHTMLOMWindowServices
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE moveTo(LONG x,LONG y);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE moveBy(LONG x,LONG y);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE resizeTo(LONG x,LONG y);
-				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE resizeBy(LONG x,LONG y);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE moveTo(LONG x, LONG y);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE moveBy(LONG x, LONG y);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE resizeTo(LONG x, LONG y);
+				XYO_WIN_EXPORT HRESULT STDMETHODCALLTYPE resizeBy(LONG x, LONG y);
 
 				//Browser
-				inline void setBrowserDefaultAddress(const Core::String &url) {
-					browserDefaultAddress_=url;
+				inline void setBrowserDefaultAddress(const Core::String &url)
+				{
+					browserDefaultAddress_ = url;
 				};
 
 				XYO_WIN_EXPORT int Navigate(Core::String url);

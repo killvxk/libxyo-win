@@ -14,14 +14,17 @@
 #include "xyo-win-window.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		using namespace XYO;
 		using namespace XYO::Core;
 
 		class MessageManager :
-			public virtual Object {
+			public virtual Object
+		{
 				XYO_CORE_DISALLOW_COPY_ASSIGN_MOVE(MessageManager);
 			public:
 				typedef TDoubleEndedQueue<TPointer<Window> > WindowList;

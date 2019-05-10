@@ -14,10 +14,13 @@
 #include "xyo-win.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
-		class DispatchVariant {
+		class DispatchVariant
+		{
 			protected:
 				VARIANTARG *variantArg_;
 
@@ -28,59 +31,73 @@ namespace XYO {
 
 				inline ~DispatchVariant() {};
 
-				inline DispatchVariant(VARIANTARG *x) {
-					variantArg_=x;
+				inline DispatchVariant(VARIANTARG *x)
+				{
+					variantArg_ = x;
 				};
 
-				inline VARIANTARG *value() {
+				inline VARIANTARG *value()
+				{
 					return variantArg_;
 				};
 
-				inline operator VARIANT_BOOL() {
+				inline operator VARIANT_BOOL()
+				{
 					return variantArg_->boolVal;
 				};
 
-				inline operator VARIANT_BOOL *() {
+				inline operator VARIANT_BOOL *()
+				{
 					return variantArg_->pboolVal;
 				};
 
-				inline operator VARIANTARG *() {
+				inline operator VARIANTARG *()
+				{
 					return variantArg_->pvarVal;
 				};
 
-				inline operator unsigned long int() {
+				inline operator unsigned long int()
+				{
 					return variantArg_->ulVal;
 				};
 
-				inline operator long int() {
+				inline operator long int()
+				{
 					return variantArg_->lVal;
 				};
 
-				inline operator int() {
+				inline operator int()
+				{
 					return variantArg_->intVal;
 				};
 
-				inline operator unsigned int() {
+				inline operator unsigned int()
+				{
 					return variantArg_->uintVal;
 				};
 
-				inline operator BSTR() {
+				inline operator BSTR()
+				{
 					return variantArg_->bstrVal;
 				};
 
-				inline operator IUnknown *() {
+				inline operator IUnknown *()
+				{
 					return variantArg_->punkVal;
 				};
 
-				inline operator IDispatch *() {
+				inline operator IDispatch *()
+				{
 					return variantArg_->pdispVal;
 				};
 
-				inline operator IUnknown **() {
+				inline operator IUnknown **()
+				{
 					return variantArg_->ppunkVal;
 				};
 
-				inline operator IDispatch **() {
+				inline operator IDispatch **()
+				{
 					return variantArg_->ppdispVal;
 				};
 

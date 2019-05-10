@@ -15,9 +15,12 @@
 #endif
 
 
-namespace XYO {
-	namespace Win {
-		namespace Registry {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace Registry
+		{
 
 			XYO_WIN_EXPORT BOOL createKey(HKEY, char *);
 			XYO_WIN_EXPORT BOOL createKeyVolatile(HKEY, char *);

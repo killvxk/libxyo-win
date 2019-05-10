@@ -13,13 +13,17 @@
 
 #include "xyo-win-ole.hpp"
 
-namespace XYO {
-	namespace Win {
-		namespace Ole {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace Ole
+		{
 
 			using namespace XYO::Core;
 
-			class XOle {
+			class XOle
+			{
 				public:
 					bool isValid;
 
@@ -27,16 +31,19 @@ namespace XYO {
 					~XOle();
 			};
 
-			XOle::XOle() {
-				isValid=true;
+			XOle::XOle()
+			{
+				isValid = true;
 				OleInitialize(NULL);
 			};
 
-			XOle::~XOle() {
+			XOle::~XOle()
+			{
 				OleUninitialize();
 			};
 
-			bool isValid() {
+			bool isValid()
+			{
 				return (TSingletonProcess<XOle>::getValue())->isValid;
 			};
 

@@ -14,11 +14,14 @@
 #include "xyo-win-variant.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class Function :
-			public virtual Core::Object {
+			public virtual Core::Object
+		{
 			protected:
 				BSTR functionName_;
 				DISPID dispIdMember_;
@@ -35,33 +38,40 @@ namespace XYO {
 				XYO_WIN_EXPORT void setObject(IDispatch *);
 				XYO_WIN_EXPORT void releaseObject();
 
-				inline IDispatch *getObject() {
+				inline IDispatch *getObject()
+				{
 					return refObject_;
 				};
 
 				XYO_WIN_EXPORT void functionName(BSTR Name);
 
-				inline BSTR functionName() {
+				inline BSTR functionName()
+				{
 					return functionName_;
 				};
 
-				inline VARIANTARG *result() {
+				inline VARIANTARG *result()
+				{
 					return &varResult_;
 				};
 
-				inline EXCEPINFO *exceptInfo() {
+				inline EXCEPINFO *exceptInfo()
+				{
 					return &exceptInfo_;
 				};
 
-				inline DISPID dispatchId() {
+				inline DISPID dispatchId()
+				{
 					return dispIdMember_;
 				};
 
-				inline UINT argErr() {
+				inline UINT argErr()
+				{
 					return nArgErr_;
 				};
 
-				inline HRESULT getDispatchId() {
+				inline HRESULT getDispatchId()
+				{
 					return refObject_->GetIDsOfNames(IID_NULL, &functionName_, 1, LOCALE_SYSTEM_DEFAULT, &dispIdMember_);
 				};
 

@@ -18,17 +18,20 @@
 #include "xyo-win-inotify.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class Window :
-			public virtual Core::Object {
+			public virtual Core::Object
+		{
 			private:
 				HWND hWnd_;
 				XYO_WIN_EXPORT static LRESULT CALLBACK windowProcedure_(HWND hWnd,
-						UINT uMsg,
-						WPARAM wParam,
-						LPARAM lParam);
+					UINT uMsg,
+					WPARAM wParam,
+					LPARAM lParam);
 				XYO_WIN_EXPORT bool destroyAndWait_();
 
 				Core::TPointer<INotify> notifyOnCreate_;
@@ -40,7 +43,8 @@ namespace XYO {
 				XYO_WIN_EXPORT Window();
 				XYO_WIN_EXPORT ~Window();
 
-				inline operator HWND() {
+				inline operator HWND()
+				{
 					return hWnd_;
 				};
 
@@ -50,23 +54,23 @@ namespace XYO {
 				XYO_WIN_EXPORT virtual bool translateAccelerator(MSG &msg);
 
 				XYO_WIN_EXPORT bool create(DWORD dwExStyle,
-							   LPCTSTR lpClassName,
-							   LPCTSTR lpWindowName,
-							   DWORD dwStyle,
-							   int x, int y,
-							   int nWidth, int nHeight,
-							   HWND hWndParent,
-							   HMENU hMenu,
-							   HINSTANCE hInstance);
+					LPCTSTR lpClassName,
+					LPCTSTR lpWindowName,
+					DWORD dwStyle,
+					int x, int y,
+					int nWidth, int nHeight,
+					HWND hWndParent,
+					HMENU hMenu,
+					HINSTANCE hInstance);
 
 				XYO_WIN_EXPORT bool create(LPCTSTR lpClassName,
-							   LPCTSTR lpWindowName,
-							   DWORD dwStyle,
-							   int x, int y,
-							   int nWidth, int nHeight,
-							   HWND hWndParent,
-							   HMENU hMenu,
-							   HINSTANCE hInstance);
+					LPCTSTR lpWindowName,
+					DWORD dwStyle,
+					int x, int y,
+					int nWidth, int nHeight,
+					HWND hWndParent,
+					HMENU hMenu,
+					HINSTANCE hInstance);
 
 				XYO_WIN_EXPORT void setNotifyOnCreate(INotify *);
 				XYO_WIN_EXPORT void setNotifyOnDestroy(INotify *);

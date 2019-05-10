@@ -11,9 +11,9 @@
 #define LIBXYO_WIN_VERSION_HPP
 
 #define LIBXYO_WIN_VERSION_ABCD                 %VERSION_ABCD%
-#define LIBXYO_WIN_VERSION_STR                 "%VERSION_VERSION%"
-#define LIBXYO_WIN_VERSION_STR_BUILD           "%VERSION_BUILD%"
-#define LIBXYO_WIN_VERSION_STR_DATETIME        "%VERSION_DATETIME%"
+#define LIBXYO_WIN_VERSION_STR                 "$VERSION_VERSION"
+#define LIBXYO_WIN_VERSION_STR_BUILD           "$VERSION_BUILD"
+#define LIBXYO_WIN_VERSION_STR_DATETIME        "$VERSION_DATETIME"
 
 #ifndef XYO_RC
 
@@ -21,10 +21,14 @@
 #include "xyo-win--export.hpp"
 #endif
 
-namespace Lib {
-	namespace XYO {
-		namespace Win {
-			namespace Version {
+namespace Lib
+{
+	namespace XYO
+	{
+		namespace Win
+		{
+			namespace Version
+			{
 				XYO_WIN_EXPORT const char *version();
 				XYO_WIN_EXPORT const char *build();
 				XYO_WIN_EXPORT const char *versionWithBuild();

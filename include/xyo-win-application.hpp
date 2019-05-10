@@ -18,12 +18,15 @@
 #include "xyo-win-messagemanager.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class Application :
 			public virtual Window,
-			public virtual XYO::Core::IMain {
+			public virtual XYO::Core::IMain
+		{
 				XYO_CORE_DISALLOW_COPY_ASSIGN_MOVE(Application);
 			protected:
 				TPointer<MessageManager> messageManager_;
@@ -38,8 +41,8 @@ namespace XYO {
 				XYO_WIN_EXPORT virtual int setShowCmd(int);
 				XYO_WIN_EXPORT virtual int parseCommandLine(int cmdN, char *cmdS[]);
 				XYO_WIN_EXPORT virtual void initWndclassEx(WNDCLASSEX &wndclassEx);
-				XYO_WIN_EXPORT virtual void initCreateStruct(CREATESTRUCT &createStruct,WNDCLASSEX &wndclassEx);
-				XYO_WIN_EXPORT virtual bool newWindow(int cmdShow,bool regWndClass=false);
+				XYO_WIN_EXPORT virtual void initCreateStruct(CREATESTRUCT &createStruct, WNDCLASSEX &wndclassEx);
+				XYO_WIN_EXPORT virtual bool newWindow(int cmdShow, bool regWndClass = false);
 
 				XYO_WIN_EXPORT static void initMemory();
 		};

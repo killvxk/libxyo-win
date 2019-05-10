@@ -18,12 +18,15 @@
 #include "xyo-win-variant.hpp"
 #endif
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
 		class Dispatch :
 			public virtual Core::Object,
-			public virtual ::IDispatch {
+			public virtual ::IDispatch
+		{
 			protected:
 				XYO_CORE_DISALLOW_COPY_ASSIGN_MOVE(Dispatch);
 			public:

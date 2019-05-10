@@ -23,31 +23,38 @@
 
 #include "xyo-win-util.hpp"
 
-namespace XYO {
-	namespace Win {
-		namespace Util {
+namespace XYO
+{
+	namespace Win
+	{
+		namespace Util
+		{
 
 			using namespace XYO::Core;
 
-			typedef struct {
+			typedef struct
+			{
 				UINT MessageId;
 				WPARAM wParam;
 				LPARAM lParam;
 			} SMessage, * PSMessage;
 
 
-			static BOOL CALLBACK EnumChildProcIE_(HWND hwnd, LPARAM lParam) {
+			static BOOL CALLBACK EnumChildProcIE_(HWND hwnd, LPARAM lParam)
+			{
 				PSMessage psMessage = (PSMessage)lParam;
 				char buf[1024];
-				buf[0]=0;
-				GetClassName(hwnd,buf,1024);
-				if(strcmp(buf,"Internet Explorer_Server")==0) {
+				buf[0] = 0;
+				GetClassName(hwnd, buf, 1024);
+				if(strcmp(buf, "Internet Explorer_Server") == 0)
+				{
 					SendMessage(hwnd, psMessage->MessageId, psMessage->wParam, psMessage->lParam);
 				};
 				return TRUE;
 			};
 
-			void sendMessageToAllChildWindowsIE(HWND hParendWnd, UINT MessageId, WPARAM wParam, LPARAM lParam) {
+			void sendMessageToAllChildWindowsIE(HWND hParendWnd, UINT MessageId, WPARAM wParam, LPARAM lParam)
+			{
 				SMessage sMessage;
 				sMessage.MessageId = MessageId;
 				sMessage.wParam = wParam;
@@ -56,18 +63,21 @@ namespace XYO {
 				EnumChildWindows(hParendWnd, EnumChildProcIE_, (LPARAM)&sMessage);
 			};
 
-			static BOOL CALLBACK EnumProcessWindowsProc_(HWND hwnd, LPARAM lParam) {
+			static BOOL CALLBACK EnumProcessWindowsProc_(HWND hwnd, LPARAM lParam)
+			{
 				PSMessage psMessage = (PSMessage)lParam;
 				DWORD processId;
 
-				GetWindowThreadProcessId(hwnd,&processId);
-				if(processId==GetCurrentProcessId()) {
+				GetWindowThreadProcessId(hwnd, &processId);
+				if(processId == GetCurrentProcessId())
+				{
 					PostMessage(hwnd, psMessage->MessageId, psMessage->wParam, psMessage->lParam);
 				};
 				return TRUE;
 			};
 
-			void postMessageToProcessWindows(UINT MessageId, WPARAM wParam, LPARAM lParam) {
+			void postMessageToProcessWindows(UINT MessageId, WPARAM wParam, LPARAM lParam)
+			{
 				SMessage sMessage;
 				sMessage.MessageId = MessageId;
 				sMessage.wParam = wParam;

@@ -9,10 +9,14 @@
 
 #include "libxyo-win-license.hpp"
 
-namespace Lib {
-	namespace XYO {
-		namespace Win {
-			namespace License {
+namespace Lib
+{
+	namespace XYO
+	{
+		namespace Win
+		{
+			namespace License
+			{
 
 				static const char *license_ =
 					"\r\n"
@@ -44,11 +48,13 @@ namespace Lib {
 					"MIT License (MIT) <http://opensource.org/licenses/MIT>\r\n"
 					"\r\n";
 
-				const char *content() {
+				const char *content()
+				{
 					return license_;
 				};
 
-				const char *shortContent() {
+				const char *shortContent()
+				{
 					return shortLicense_;
 				};
 

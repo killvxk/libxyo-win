@@ -13,41 +13,51 @@
 
 #include "xyo-win-application.hpp"
 
-namespace XYO {
-	namespace Win {
+namespace XYO
+{
+	namespace Win
+	{
 
-		int Application::main(int cmdN, char *cmdS[]) {
+		int Application::main(int cmdN, char *cmdS[])
+		{
 			int retV;
 
 			messageManager_.newMemory();
 
-			retV = parseCommandLine(cmdN,cmdS);
-			if (retV != 0) {
+			retV = parseCommandLine(cmdN, cmdS);
+			if (retV != 0)
+			{
 				return retV;
 			}
 
-			if(!newWindow(SW_SHOWDEFAULT,true)) {
+			if(!newWindow(SW_SHOWDEFAULT, true))
+			{
 				return -1;
 			};
 
 			return messageManager_->processAllMessages();
 		};
 
-		void Application::setWndclassEx(WNDCLASSEX &) {
+		void Application::setWndclassEx(WNDCLASSEX &)
+		{
 		};
 
-		void Application::setCreateStruct(CREATESTRUCT &) {
+		void Application::setCreateStruct(CREATESTRUCT &)
+		{
 		};
 
-		int Application::setShowCmd(int x) {
+		int Application::setShowCmd(int x)
+		{
 			return x;
 		};
 
-		int Application::parseCommandLine(int cmdN, char *cmdS[]) {
+		int Application::parseCommandLine(int cmdN, char *cmdS[])
+		{
 			return 0;
 		};
 
-		void Application::initWndclassEx(WNDCLASSEX &wndclassEx) {
+		void Application::initWndclassEx(WNDCLASSEX &wndclassEx)
+		{
 			memset(&wndclassEx, 0, sizeof (wndclassEx));
 
 			wndclassEx.cbSize = sizeof (wndclassEx);
@@ -63,7 +73,8 @@ namespace XYO {
 			wndclassEx.hIconSm = NULL;
 		};
 
-		void Application::initCreateStruct(CREATESTRUCT &createStruct,WNDCLASSEX &wndclassEx) {
+		void Application::initCreateStruct(CREATESTRUCT &createStruct, WNDCLASSEX &wndclassEx)
+		{
 			memset(&createStruct, 0, sizeof (createStruct));
 			createStruct.lpCreateParams = NULL;
 			createStruct.hInstance = GetModuleHandle(NULL);
@@ -79,30 +90,34 @@ namespace XYO {
 			createStruct.dwExStyle = WS_EX_APPWINDOW | WS_EX_CLIENTEDGE | WS_EX_WINDOWEDGE;
 		};
 
-		bool Application::newWindow(int cmdShow,bool regWndClass) {
+		bool Application::newWindow(int cmdShow, bool regWndClass)
+		{
 			WNDCLASSEX wndclassEx;
 			CREATESTRUCT createStruct;
 
 			initWndclassEx(wndclassEx);
 			setWndclassEx(wndclassEx);
 
-			if(regWndClass) {
-				if (!registerClass(wndclassEx)) {
+			if(regWndClass)
+			{
+				if (!registerClass(wndclassEx))
+				{
 					return false;
 				};
 			};
 
-			initCreateStruct(createStruct,wndclassEx);
+			initCreateStruct(createStruct, wndclassEx);
 			setCreateStruct(createStruct);
 
 			if (!create(createStruct.dwExStyle,
-				    createStruct.lpszClass,
-				    createStruct.lpszName,
-				    createStruct.style,
-				    createStruct.x, createStruct.y, createStruct.cx, createStruct.cy,
-				    createStruct.hwndParent,
-				    createStruct.hMenu,
-				    createStruct.hInstance)) {
+					createStruct.lpszClass,
+					createStruct.lpszName,
+					createStruct.style,
+					createStruct.x, createStruct.y, createStruct.cx, createStruct.cy,
+					createStruct.hwndParent,
+					createStruct.hMenu,
+					createStruct.hInstance))
+			{
 				return false;
 			};
 
@@ -111,7 +126,8 @@ namespace XYO {
 			return true;
 		};
 
-		void Application::initMemory() {
+		void Application::initMemory()
+		{
 			TPointer<MessageManager>::initMemory();
 		};
 
